@@ -17,128 +17,54 @@
         </el-col>
         <el-col :span="12" class="right-col">
           <!-- 左侧按钮 -->
-          <draggable
-            v-model="buttonList"
-            draggable=".c-item"
-            v-bind="dragOptions"
-            :options="{sort: false, group: {name: 'field', pull:'clone',put: false}}"
-          >
-            <transition-group>
-              <el-button v-for="(item,index) in buttonList" :key="index">
+<!--          <draggable-->
+<!--            v-model="buttonList"-->
+<!--            draggable=".c-item"-->
+<!--            ghost-class="ghost"-->
+<!--            handle=".handle"-->
+<!--            :move="checkMove"-->
+<!--            :group="{ name: 'people', pull: 'clone', put: false }"-->
+<!--            @change="log"-->
+<!--            v-bind="dragOptions"-->
+<!--            :options="{sort: false, group: {name: 'field', pull:'clone',put: false}}"-->
+<!--          >-->
+          <draggable group="field" class="surface-part"
+                     :list="sectionList"
+                     v-bind="dragOptions"
+                     :options="{sort: false, group: {name: 'field', pull:'clone',put: false}}"
+                     @change="log">
+<!--            <transition-group>-->
+              <el-button v-for="(item,index) in buttonList" :key="item.name">
                 <div class="add-don">
                   <img :src="item.src" alt="" class="don-icon">
                   <span class="don-text">{{ item.name }}</span>
                 </div>
               </el-button>
-              <!--              <div v-for="d in list1" :key="d.id" class="item c-item">{{ d.name }}</div>-->
-            </transition-group>
+<!--            </transition-group>-->
           </draggable>
-
-          <!--          <el-button v-for="(item,index) in buttonList" :key="index" >-->
-          <!--            <div class="add-don">-->
-          <!--              <img :src="item.src" alt="" class="don-icon">-->
-          <!--              <span class="don-text">{{item.name}}</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
-          <!--          <el-button v-for="(item,index) in buttonList" :key="index" >-->
-          <!--            <div class="add-don">-->
-          <!--              <img src="../../public/image/don1.png" alt="" class="don-icon">-->
-          <!--              <span class="don-text">咚</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
-          <!--          <el-button>-->
-          <!--            <div class="add-don">-->
-          <!--              <img src="../../public/image/ka.png" alt="" class="don-icon">-->
-          <!--              <span class="don-text">咔</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
-          <!--          <el-button>-->
-          <!--            <div class="add-don">-->
-          <!--              <img src="../../public/image/don-dai.png" alt="" class="don-icon">-->
-          <!--              <span class="don-text">咚（大）</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
-          <!--          <el-button>-->
-          <!--            <div class="add-don">-->
-          <!--              <img src="../../public/image/ka-dai.png" alt="" class="don-icon">-->
-          <!--              <span class="don-text">咔（大）</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
-          <!--          <el-button>-->
-          <!--            <div class="add-don">-->
-          <!--              <img src="../../public/image/roll.png" alt="" class="don-icon">-->
-          <!--              <span class="don-text">连打</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
-          <!--          <el-button>-->
-          <!--            <div class="add-don">-->
-          <!--              <img src="../../public/image/ballon.png" alt="" class="don-icon">-->
-          <!--              <span class="don-text">气球</span>-->
-          <!--            </div>-->
-          <!--          </el-button>-->
         </el-col>
       </el-row>
 
     </div>
     <div class="editbox">
       <div class="scroll-bar">
-        <!--                左侧用于显示分数的部分-->
+        <!--左侧用于显示分数的部分-->
         <div class="score-box">
           <div class="taiko"></div>
-
-
-          <!--                  </draggable>-->
-          <!--                  -->
-          <!--                    <draggable-->
-          <!--                            class="dragArea list-group"-->
-          <!--                            :list="list1"-->
-          <!--                            :group="{ name: 'people', pull: 'clone', put: false }"-->
-          <!--                            @change="log"-->
-          <!--                    >-->
-          <!--                        <transition-group>-->
-          <!--                        <div-->
-          <!--                                class="list-group-item"-->
-          <!--                                v-for="element in list1"-->
-          <!--                                :key="element.name"-->
-          <!--                        >-->
-          <!--                            {{ element.name }}-->
-          <!--                        </div>-->
-          <!--                        </transition-group>-->
-          <!--                    </draggable>-->
-          <!--                    <draggable-->
-          <!--                            class="dragArea list-group"-->
-          <!--                            :list="list2"-->
-          <!--                            group="people"-->
-          <!--                            @change="log"-->
-          <!--                    >-->
-          <!--                        <transition-group>-->
-          <!--                        <div-->
-          <!--                                class="list-group-item"-->
-          <!--                                v-for="element in list2"-->
-          <!--                                :key="element.name"-->
-          <!--                        >-->
-          <!--                            {{ element.name }}-->
-          <!--                        </div>-->
-          <!--                        </transition-group>-->
-          <!--                    </draggable>-->
-          <!--                    <rawDisplayer class="col-3" :value="list1" title="List 1" />-->
-          <!--                    <rawDisplayer class="col-3" :value="list2" title="List 2" />-->
         </div>
-        <!--                右侧用于显示谱面部分-->
+        <!--右侧用于显示谱面部分-->
         <div class="surface-box">
           <div class="surface-main">
-            <!--                        用于谱面滚动-->
+            <!--用于谱面滚动-->
             <div class="surface-scroll">
-              <!--                            1小节-->
-<!--              <div class="surface-part">-->
-                <!-- 右侧按钮 -->
-                <draggable group="field" class="surface-part" :list="sectionNumber" v-bind="dragOptions" @change="toChange">
-                  <div class="part-item" v-for="(item,index) in sectionList"
+                <!-- 循环小节线 -->
+                <draggable group="field" class="surface-part"
+                           :list="sectionList"
+                           v-bind="dragOptions"
+                           @change="toChange">
+                  <div class="part-item" v-for="(item,index) in sectionList" :key="index"
                        :style="{'width':partLength+'px',}"></div>
-                  <!--                  <div v-for="d in list2" :key="d.id" class="item">{{ d.name }}</div>-->
                 </draggable>
-
-<!--              </div>-->
             </div>
             <div class="determine">
               <div class="circle">
@@ -152,10 +78,6 @@
         </div>
       </div>
     </div>
-    <!--        <audio class="success"-->
-    <!--               src="/static/audios/do_wrong.mp3">-->
-    <!--        </audio>-->
-
   </div>
 </template>
 
@@ -258,21 +180,22 @@ export default {
       console.log(this.sectionList)
       //
     },
-
-    log: function (evt) {
+    checkMove: function(evt){
+      return (evt.draggedContext.element.name!=='apple');
+    },
+    log (evt) {
       window.console.log(evt);
+      console.log(this.sectionList)
     },
     toChange(e) {
       console.log(e)
       if (e.added) {
-        console.log(this.list2)
+        // console.log(this.list2)
       }
     },
   },
   mounted: function () {
-    this.colors.forEach((item) => {
-      Vue.set(item, 'isComb', false)
-    })
+
   },
 }
 </script>
